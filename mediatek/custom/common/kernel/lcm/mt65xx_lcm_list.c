@@ -17,6 +17,7 @@
 #else
 #define LCD_DEBUG(fmt)  printk(fmt)
 #endif
+extern LCM_DRIVER ili9806e_dsi_vdo_fwvga_txd_zaw1800_lcm_drv;
 extern LCM_DRIVER otm1282a_hd720_dsi_vdo_lcm_drv;
 extern LCM_DRIVER r63319_wqhd_dsi_vdo_truly_lcm_drv;
 extern LCM_DRIVER nt35598_wqhd_dsi_vdo_truly_lcm_drv;
@@ -186,6 +187,9 @@ extern LCM_DRIVER ili9806e_fwvga_dsi_vdo_glass_drv;
 
 LCM_DRIVER* lcm_driver_list[] = 
 { 
+#if defined(ILI9806E_DSI_VDO_FWVGA_TXD_ZAW1800)
+        &ili9806e_dsi_vdo_fwvga_txd_zaw1800_lcm_drv,
+#endif
 #if defined(OTM8018B_DSI_VDO_TXD_FWVGA)
 	&otm8018b_dsi_vdo_txd_fwvga_lcm_drv,
 #endif
