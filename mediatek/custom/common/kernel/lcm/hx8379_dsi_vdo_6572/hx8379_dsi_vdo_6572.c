@@ -203,55 +203,43 @@ static void lcm_get_params(LCM_PARAMS *params)
 	params->width  = FRAME_WIDTH;
 	params->height = FRAME_HEIGHT;
 
-	//enable tearing-free
-	//params->dbi.te_mode 				= LCM_DBI_TE_MODE_VSYNC_ONLY;
-	//params->dbi.te_edge_polarity		= LCM_POLARITY_RISING;
 	params->dbi.te_mode 				= LCM_DBI_TE_MODE_DISABLED;
 
-#if (LCM_DSI_CMD_MODE)
-	params->dsi.mode   = CMD_MODE;
-#else
 	params->dsi.mode   = SYNC_PULSE_VDO_MODE;
-#endif
 
-	// DSI
-	/* Command mode setting */
 	params->dsi.LANE_NUM				= LCM_TWO_LANE;
 
-	//The following defined the fomat for data coming from LCD engine.
 	params->dsi.data_format.color_order = LCM_COLOR_ORDER_RGB;
 	params->dsi.data_format.trans_seq   = LCM_DSI_TRANS_SEQ_MSB_FIRST;
 	params->dsi.data_format.padding     = LCM_DSI_PADDING_ON_LSB;
 	params->dsi.data_format.format      = LCM_DSI_FORMAT_RGB888;
 
-	// Highly depends on LCD driver capability.
-	// Not support in MT6573
-	params->dsi.packet_size=256;
-
-	// Video mode setting		
+	//params->dsi.packet_size=256;
+		
 	params->dsi.intermediat_buffer_num = 2;
 
 	params->dsi.PS=LCM_PACKED_PS_24BIT_RGB888;
 	params->dsi.word_count=480*3;
 
-	params->dsi.vertical_sync_active				= 6; 
-	params->dsi.vertical_backporch					= 6;
-	params->dsi.vertical_frontporch					= 8;
+	params->dsi.vertical_sync_active				= 2; 
+	params->dsi.vertical_backporch					= 5;
+	params->dsi.vertical_frontporch					= 5;
 	params->dsi.vertical_active_line				= FRAME_HEIGHT; 
 
-	params->dsi.horizontal_sync_active				= 35;
-	params->dsi.horizontal_backporch				= 60; //modify by fangjie for frame rate set to 60. 
-	params->dsi.horizontal_frontporch				= 60; //modify by fangjie for frame rate set to 60. 
-	params->dsi.horizontal_blanking_pixel			= 60;
+	params->dsi.horizontal_sync_active				= 4;
+	params->dsi.horizontal_backporch				= 27;
+	params->dsi.horizontal_frontporch				= 27;
+	//params->dsi.horizontal_blanking_pixel			= 60;
 	params->dsi.horizontal_active_pixel				= FRAME_WIDTH;
 
-	params->dsi.PLL_CLOCK=182; //modify by fangjie for frame rate set to 60. 
-	params->dsi.ssc_disable = 0;
-	params->dsi.ssc_range   = 5;
+	params->dsi.PLL_CLOCK=159;
+	params->dsi.ssc_disable = 1;
+	params->dsi.ssc_range   = 4;
 	
-	//note: for Video mode
-	//fps = data_rate * Lane_Number /( (Vsyn+VBP+VFP+Height)*(Hsyn+HBP+HFP+Width)*BPP)
-	//data_rate = CLOCK_rate * 2;
+
+        params->dbi.te_edge_polarity = 0;
+        params->dsi.noncont_clock_period = 2;
+        params->dsi.noncont_clock = 1;
 
 }
 
