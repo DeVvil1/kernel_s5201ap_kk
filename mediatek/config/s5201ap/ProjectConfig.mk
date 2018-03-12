@@ -1467,13 +1467,13 @@ MTK_HDMI_SUPPORT=no
 BOOT_LOGO=fwvga
 
 # To choose kernel LCM driver name
-CUSTOM_KERNEL_LCM=ili9806e_dsi_vdo_fwvga_txd_zaw1800
+CUSTOM_KERNEL_LCM=hx8379_dsi_vdo_6572
 
 # To choose uboot LCM driver name
 CUSTOM_UBOOT_LCM=ili9806e_fwvga_dsi_vdo_txd hx8379c_fwvga_dsi_vdo_tcl ili9806e_fwvga_dsi_vdo_dj ili9806e_fwvga_dsi_vdo_glass
 
 # To set LCM resolution height size
-LCM_HEIGHT=854
+LCM_HEIGHT=800
 
 # To set LCM resolution width size
 LCM_WIDTH=480
