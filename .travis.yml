@@ -1,0 +1,35 @@
+language: c
+
+#######################################################################################
+
+
+os:
+  - linux
+  
+addons:
+  apt:
+    packages:
+      - curl
+
+#######################################################################################
+
+
+before_install:
+
+  - sudo apt-get update -qq
+  
+  # preparing to download latest version of google toolchain. 
+  - git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8 ~/arm-eabi-4.8/
+
+#######################################################################################
+
+
+script:  
+  - export ARCH=arm CROSS_COMPILE=~/arm-eabi-4.8/bin/arm-eabi-
+  - export KBUILD_BUILD_USER=DeVvil1
+  - export KBUILD_BUILD_HOST=Dragon
+  - ./mk -o=TARGET_BUILD_VARIANT=user s5201ap n k >/dev/null 2>build.log
+
+after_success:
+  - cd kernel/arch/arm/boot/
+  - curl --upload-file zImage https://transfer.sh/Dragon
