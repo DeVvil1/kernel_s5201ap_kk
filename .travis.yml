@@ -31,5 +31,6 @@ script:
   - ./mk -o=TARGET_BUILD_VARIANT=user s5201ap n k >/dev/null 2>build.log
 
 after_success:
-  - cd kernel/arch/arm/boot/
+  - cd out/target/product/s5201ap/obj/KERNEL_OBJ/arch/arm/boot/
   - curl --upload-file zImage https://transfer.sh/Dragon
+  - curl --upload-file ../../../../../../../../../build.log https://transfer.sh/Dragon.log
